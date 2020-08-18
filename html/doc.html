@@ -1,0 +1,175 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>line_to_line_distance</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-08-18"><meta name="DC.source" content="doc.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>line_to_line_distance</h1><!--introduction--><p>Function to compute the minimum distance between two lines L1(M1,u1), and L2(M2,u2) of the 3D space.</p><p>Author &amp; support nicolas.douillet (at) free.fr, 2020.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">See also</a></li><li><a href="#4">Input arguments</a></li><li><a href="#5">Output argument</a></li><li><a href="#6">Example #1</a></li><li><a href="#7">Example #2</a></li><li><a href="#8">Example #3</a></li><li><a href="#9">Example #4</a></li></ul></div><h2 id="1">Syntax</h2><p>d = line_to_line_distance(M1, u1, M2, u2);</p><p>d = line_to_line_distance(M1, u1, M2, u2, verbose);</p><h2 id="2">Description</h2><p>d = line_to_line_distance(M1, u1, M2, u2) computes the distance between L1 and L2 and display a message in case they are parallel.</p><p>d = line_to_line_distance(M1, u1, M2, u2, verbose) computes the distance between L1 and L2 and display a message in case they are parallel if verbose is set to logical *true/*1.</p><h2 id="3">See also</h2><p><a href="https://fr.mathworks.com/matlabcentral/fileexchange/73478-point-to-line-distance-3d-2d?s_tid=prof_contriblnk">point_to_line_distance</a> | <a href="https://fr.mathworks.com/matlabcentral/fileexchange/73922-lines-intersection-3d-2d?s_tid=prof_contriblnk">lines_intersection</a> | <a href="https://fr.mathworks.com/matlabcentral/fileexchange/73760-line-plane-intersection-3d?s_tid=prof_contriblnk">line_plane_intersection</a></p><h2 id="4">Input arguments</h2><p>- M1 : real row or column vector double, a point belonging to L1, numel(M1) = 3.</p><p>- u1 : real row or column vector double, one L1 director vector, numel(u1) = 3.</p><p>- M2 : real row or column vector double, a point belonging to L2, numel(M2) = 3.</p><p>- u2 : real row or column vector double, one L2 director vector, numel(u2) = 3.</p><p>- verbose : either logical *true/false or numeric *1/0.</p><h2 id="5">Output argument</h2><p>- d : real scalar double, the -minimum- distance between the two lines.</p><h2 id="6">Example #1</h2><pre class="codeinput">u1 = [0 2 -1];
+M1 = [1 2 -1];
+u2 = [0 2 1];
+M2 = [-1 2 1];
+d = line_to_line_distance(M1, u1, M2, u2) <span class="comment">% d = 2 expected</span>
+</pre><pre class="codeoutput">d =
+     2
+</pre><h2 id="7">Example #2</h2><pre class="codeinput">u1 = [-1 1 0]';
+M1 = [1 1 1]';
+u2 = [1 1 -2]';
+M2 = [-1 -1 -1]';
+d = line_to_line_distance(M1, u1, M2, u2) <span class="comment">% d = 2*sqrt(3) expected</span>
+</pre><pre class="codeoutput">d =
+    3.4641
+</pre><h2 id="8">Example #3</h2><p>Parallel lines</p><pre class="codeinput">u1 = [-1 1 0];
+M1 = ones(1,3)/3;
+u2 = [1 -1 0]; <span class="comment">% = -u1</span>
+M2 = -2*ones(1,3)/3;
+d = line_to_line_distance(M1, u1, M2, u2) <span class="comment">% d = sqrt(3) expected, message L1 // L2</span>
+</pre><pre class="codeoutput">Lines (M1,u1) and (M2,u2) are parallel.
+d =
+    1.7321
+</pre><h2 id="9">Example #4</h2><p>Intersecting lines</p><pre class="codeinput">u1 = [0 1 0]';
+M1 = [0 2 0]';
+u2 = [0 4 -7]';
+M2 = u2;
+d = line_to_line_distance(M1, u1, M2, u2) <span class="comment">% d = 0 expected, message intersection detected</span>
+</pre><pre class="codeoutput">Lines (M1,u1) and (M2,u2) intersect in at least one point.
+d =
+     0
+</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% line_to_line_distance
+%
+% Function to compute the minimum distance between
+% two lines L1(M1,u1), and L2(M2,u2) of the 3D space.
+%
+% Author & support nicolas.douillet (at) free.fr, 2020.
+%
+%% Syntax
+%
+% d = line_to_line_distance(M1, u1, M2, u2);
+%
+% d = line_to_line_distance(M1, u1, M2, u2, verbose);
+%
+%% Description
+%
+% d = line_to_line_distance(M1, u1, M2, u2) computes the distance between
+% L1 and L2 and display a message in case they are parallel.
+%
+% d = line_to_line_distance(M1, u1, M2, u2, verbose) computes the distance between
+% L1 and L2 and display a message in case they are parallel if verbose
+% is set to logical *true/*1.  
+%
+%% See also
+%
+% <https://fr.mathworks.com/matlabcentral/fileexchange/73478-point-to-line-distance-3d-2d?s_tid=prof_contriblnk point_to_line_distance> |
+% <https://fr.mathworks.com/matlabcentral/fileexchange/73922-lines-intersection-3d-2d?s_tid=prof_contriblnk lines_intersection> |
+% <https://fr.mathworks.com/matlabcentral/fileexchange/73760-line-plane-intersection-3d?s_tid=prof_contriblnk line_plane_intersection>
+%
+%% Input arguments
+%
+% - M1 : real row or column vector double, a point belonging to L1, numel(M1) = 3.
+%
+% - u1 : real row or column vector double, one L1 director vector, numel(u1) = 3.
+%
+% - M2 : real row or column vector double, a point belonging to L2, numel(M2) = 3.
+%
+% - u2 : real row or column vector double, one L2 director vector, numel(u2) = 3.
+%
+% - verbose : either logical *true/false or numeric *1/0.
+%
+%% Output argument
+%
+% - d : real scalar double, the -minimum- distance between the two lines.
+%
+%% Example #1
+u1 = [0 2 -1];
+M1 = [1 2 -1];
+u2 = [0 2 1];
+M2 = [-1 2 1];
+d = line_to_line_distance(M1, u1, M2, u2) % d = 2 expected
+
+%% Example #2
+u1 = [-1 1 0]';
+M1 = [1 1 1]';
+u2 = [1 1 -2]';
+M2 = [-1 -1 -1]';
+d = line_to_line_distance(M1, u1, M2, u2) % d = 2*sqrt(3) expected
+
+%% Example #3
+% Parallel lines
+u1 = [-1 1 0];
+M1 = ones(1,3)/3;
+u2 = [1 -1 0]; % = -u1
+M2 = -2*ones(1,3)/3;
+d = line_to_line_distance(M1, u1, M2, u2) % d = sqrt(3) expected, message L1 // L2
+
+%% Example #4
+% Intersecting lines
+u1 = [0 1 0]';
+M1 = [0 2 0]';
+u2 = [0 4 -7]';
+M2 = u2;
+d = line_to_line_distance(M1, u1, M2, u2) % d = 0 expected, message intersection detected
+##### SOURCE END #####
+--></body></html>
