@@ -86,12 +86,12 @@ assert(isreal(u1) && isreal(u2) && isreal(M1) && isreal(M2),'All inputs vectors 
 
 
 %% Body
-epsilon = eps;
+precision = 1e3*eps;
 M1M2 = M2 - M1;
 w = cross(u1,u2);
 nw = norm(w);
 
-if norm(w) < 1e-4*epsilon % case L1 // L2
+if norm(w) < precision % case L1 // L2
 
     if verbose
        
@@ -116,7 +116,7 @@ if verbose
         
         disp('Lines (M1,u1) and (M2,u2) intersect in at least one point.');
         
-        if nw < 1e-4*epsilon
+        if nw < precision
             
             disp('Lines (M1,u1) and (M2,u2) also have colinear direct vectors : they are one same line.');
             
