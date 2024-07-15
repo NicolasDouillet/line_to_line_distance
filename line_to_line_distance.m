@@ -2,7 +2,7 @@ function [d] = line_to_line_distance(M1, u1, M2, u2, verbose)
 %% line_to_line_distance : function to compute the minimum distance between
 % two lines L1(M1,u1), and L2(M2,u2) of the 3D space.
 %
-% Author & support nicolas.douillet (at) free.fr, 2020.
+% Author : nicolas.douillet9 (at) gmail.com, 2020-2024.
 %
 %
 % Syntax
